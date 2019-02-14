@@ -5,6 +5,7 @@ public class Welcome {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome DevOps and Jenkins");
 		System.out.println("Welcome DevOps and Jenkins1");
+		System.out.println("Welcome DevOps and Jenkins2");
 	}
 
 }
