@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Maximo">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="MaximoConnector1.rar" deploy-path="/" handle="module:/resource/MaximoConnector1/MaximoConnector1">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="MaximoClient1.jar" deploy-path="/" handle="module:/resource/MaximoClient1/MaximoClient1">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="MaximoWeb1.war" deploy-path="/" handle="module:/resource/MaximoWeb1/MaximoWeb1">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
