@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+
+
+
+<project name="freedom" default="freedom" basedir=".">
+
+
+
+	<description>
+
+		This build file is used to build the custom functionality for the Freedom Maximo Project.
+
+	</description>
+
+	<property file="build.properties" />
+
+	
+
+	<target name="init">		
+
+		
+
+		<!-- bo.lib.jars is the fileset of JAR files that are required to build the project. -->
+
+		<fileset id="bo.lib.jars" dir="${bo.lib}">
+
+			<include name="**/*.jar" />
+
+		</fileset>
+
+		<fileset id="maximo.lib.jars" dir="${maximo.home}/applications/maximo/lib">
+			<include name="**/*.jar" />	
+		</fileset>
+
+		
+
+		<!-- ui.lib.jars is the fileset of JAR files that are required to build the project. -->
+
+		<fileset id="ui.lib.jars" dir="${ui.lib}">
+
+			<include name="**/*.jar" />
+
+		</fileset>
+
+		
+
+		<delete includeEmptyDirs="true" failonerror="false">
+
+			<fileset dir="${maximo.bo.classes}/org" />
+
+			<fileset dir="${maximo.ui.classes}/org" />
+
+		</delete>
+
+		<echo>Base directory: ${basedir}</echo>
+
+	</target>
+
+
+
+	<target name="boCompile" depends="init" description="Compile Java Source Business Objects for the Project.">
+
+		<tstamp>
+
+			<format property="bo.start" pattern="yyyy/MM/dd HH:mm:ss:SSS" />
+
+		</tstamp>
+
+		<echo>Compiling Java Source Business Objects for the Project: ${bo.start}</echo>		
+
+		<echo>SRC directory: ${bo.src}</echo>
+
+		<echo>destination dir: ${maximo.bo.classes}</echo>
+
+
+
+		<javac debug="true" debuglevel="lines,vars,source" srcdir="${bo.src}" destdir="${maximo.bo.classes}" source="1.8" target="1.8" includeantruntime="false">
+
+			<classpath>
+
+				<fileset refid="bo.lib.jars" />
+
+			</classpath>
+
+			<include name="org/**/*.java" />
+
+		</javac>
+
+	</target>
+
+
+
+	<target name="uiCompile" depends="init" description="Compile Java Source UI Objects for the Project.">
+
+		<tstamp>
+
+			<format property="ui.start" pattern="yyyy/MM/dd HH:mm:ss:SSS" />
+
+		</tstamp>
+
+		<echo>Compiling Java Source UI Objects for the Project: ${ui.start}</echo>
+
+		<echo>SRC directory: ${ui.src}</echo>
+
+		<echo>destination dir: ${maximo.ui.classes}</echo>
+
+		<javac debug="true" debuglevel="lines,vars,source" srcdir="${ui.src}" destdir="${maximo.ui.classes}" source="1.8" target="1.8" includeantruntime="false">
+
+			<classpath>
+
+				<pathelement path="${maximo.bo.classes}" />
+				<pathelement path="${maximo.ui.classes}" />
+
+				<fileset refid="bo.lib.jars" />
+
+				<fileset refid="ui.lib.jars" />
+				<fileset refid="maximo.lib.jars" />
+
+			</classpath>
+
+			<include name="org/**/*.java" />
+		
+
+		</javac>
+
+	</target>
+
+	
+
+	<target name="buildmaximo">
+
+		<exec dir="${maximo.deployment}" executable="./buildmaximoear.sh">			
+
+		</exec>
+
+	</target>
+
+
+
+	<target name="freedom" depends="boCompile,uiCompile,buildmaximo" description="Copy all the source files to Maximo application directory.">
+
+	
+
+	</target>
+
+
+
+</project>
+
+
