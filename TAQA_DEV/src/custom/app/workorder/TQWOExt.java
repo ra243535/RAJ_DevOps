@@ -55,7 +55,7 @@ public class TQWOExt extends WOExt {
 					.getString("location")))) {
 				workorderMbo.setValue("location", getString("location"), 2L);
 			}
-			
+		
 		}
 		if ((jpnum != null) && (!(jpnum.equals("")))) {
 			workorderMbo.setValue("jpnum", jpnum, 2L);
